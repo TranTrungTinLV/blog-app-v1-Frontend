@@ -1,38 +1,39 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Dropzone from "react-dropzone";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostAction } from "../../redux/slices/posts/PostsSlices";
-// import CategoryDropDown from "../Categories/CategoryDropDown";
+import CategoryDropdown from "../Categories/CategoryDropdown";
+import { Navigate } from "react-router-dom";
 
 //Form schema
 const formSchema = Yup.object({
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
+    category: Yup.object().required("Category is required"),
+    image: Yup.string().required("Image is required"),
+
 });
-//css for dropzone
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-width: 2px;
-  border-radius: 2px;
-  border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
-border-color:'red'
-  transition: border 0.24s ease-in-out;
-`;
+// //css for dropzone
+// const Container = styled.div`
+//   flex: 1;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 20px;
+//   border-width: 2px;
+//   border-radius: 2px;
+//   border-style: dashed;
+//   background-color: #fafafa;
+// `;
 
 export default function CreatePost() {
     const dispatch = useDispatch();
 
     //select store data
     const post = useSelector(state => state?.post);
-    const { appErr, serverErr } = post;
+    const { isCreated, loading, appErr, serverErr } = post;
+    // console.log(postCreated);
     //formik
     const formik = useFormik({
         initialValues: {
@@ -49,7 +50,7 @@ export default function CreatePost() {
                 category: values?.category?.label,
                 title: values?.title,
                 description: values?.description,
-                image: values?.image,
+                image: values?.image
             };
               dispatch(createPostAction(data));
         },
@@ -57,7 +58,7 @@ export default function CreatePost() {
     });
 
     //redirect
-    //   if (isCreated) return <Redirect to="/posts" />;
+      if (isCreated) return <Navigate to="/posts" replace />;
     return (
         <>
             <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -72,12 +73,13 @@ export default function CreatePost() {
                             profanity
                         </span>
                     </p>
-
-                    {appErr || serverErr ? (
-                        <p className="mt-2 text-center text-lg text-red-600">
-                            {serverErr} {appErr}
-                        </p>
-                    ) : null}
+                  
+                 
+          {appErr || serverErr ? (
+            <p className="mt-2 text-center text-lg text-red-600">
+              {serverErr} {appErr}
+            </p>
+          ) : null}
                 </div>
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -104,7 +106,7 @@ export default function CreatePost() {
                                 </div>
                                 {/* Err msg */}
                                 <div className="text-red-500">
-                                    {formik?.touched?.title}
+                                    {formik?.touched?.title && formik?.errors?.title}
                                 </div>
                             </div>
                             {/* Category input goes here */}
@@ -114,13 +116,22 @@ export default function CreatePost() {
                             >
                                 Select Category
                             </label>
-                            <button
+                            <CategoryDropdown
                                 value={formik.values.category?.label}
                                 onChange={formik.setFieldValue}
                                 onBlur={formik.setFieldTouched}
                                 error={formik.errors.category}
                                 touched={formik.touched.category}
+                            />                   
+
+                            <button
+                                value={formik.values.category}
+                                onChange={formik.setFieldValue}
+                                onBlur={formik.setFieldTouched}
+                                error={formik.errors.category}
+                                touched={formik.touched.category}
                             />
+                            
                             <div>
                                 <label
                                     htmlFor="password"
@@ -138,20 +149,59 @@ export default function CreatePost() {
                                     className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
                                     type="text"
                                 ></textarea>
+                                {/* Image component */}
+                                <label
+                                htmlFor="password"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Select image
+                            </label>
+                  <Dropzone
+                    onBlur={formik.handleBlur("image")}
+                    accept="image/jpeg, image/png, image/*"
+                    onDrop={acceptedFiles => {
+                      formik.setFieldValue("image", acceptedFiles[0]);
+                    }}
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                      
+<div class="flex items-center justify-center w-full mt-6">
+    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div {...getRootProps({
+                            className: "dropzone flex flex-col items-center justify-center pt-5 pb-6",
+                            onDrop: event => event.stopPropagation(),
+                          })}>
+            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> image</p>
+        </div>
+     
+    </label>
+</div> 
 
+                    )}
+                  </Dropzone>
+                </div>
                                 {/* Err msg */}
                                 <div className="text-red-500">
-                                    {formik?.touched?.description}
+                                    {formik?.touched?.description && formik?.errors?.description}
                                 </div>
-                            </div>
+                            
                             <div>
                                 {/* Submit btn */}
-                                <button
+                              {loading ?   <button
+                                disabled
+                                    type="submit"
+                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    Loading Please...
+                                </button> :   <button
                                     type="submit"
                                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
                                     Create
-                                </button>
+                                </button>}
                             </div>
                         </form>
                     </div>

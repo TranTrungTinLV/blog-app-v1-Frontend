@@ -1,7 +1,8 @@
 import {React} from 'react'
 import  RiseLoader  from 'react-spinners/CircleLoader';
 import { css } from "@emotion/react";
-//css 
+import { GridLoader } from 'react-spinners';
+//css   
 const override = css`
   display: block;
   margin: 0 auto;
@@ -12,5 +13,10 @@ const override = css`
 const LoadingComponent = () => {
 
   return <RiseLoader color='red' loading={true} css={override} ></RiseLoader>
+}
+
+export function LoadingComponentCirCle() {
+
+  return <GridLoader color='white' loading={true} css={override} ></GridLoader>
 }
 export default LoadingComponent;

@@ -7,7 +7,6 @@ const resetEditAction = createAction("category/reset");
 const resetDeleteAction = createAction("category/delete-reset");
 const resetCategoryAction = createAction("category/created-reset");
 
-
 //action
 export const createCategoryAction = createAsyncThunk('category/create',async(category,{rejectWithValue,getState,dispatch})=>{
     //get user token
@@ -36,27 +35,30 @@ export const createCategoryAction = createAsyncThunk('category/create',async(cat
 });
 
 //fetch all action
-export const fetchCategoriesAction = createAsyncThunk('category/fetch',async(category,{rejectWithValue,getState,dispatch})=>{
-    //get user token
-    const user = getState()?.users;
-    const {userAuth} = user;
-    // console.log(userAuth?.token)
-    const config = {
+export const fetchCategoriesAction = createAsyncThunk(
+    "category/fetch",
+    async (category, { rejectWithValue, getState, dispatch }) => {
+      //get user token
+      const user = getState()?.users;
+      const { userAuth } = user;
+      const config = {
         headers: {
-            Authorization: `Bearer ${userAuth?.token}` 
-        }
-    }
-    //http callback
-    try {
-        const {data} = await axios.get(`${baseUrl}/api/category`,config);
+          Authorization: `Bearer ${userAuth?.token}`,
+        },
+      };
+      //http call
+      try {
+        const { data } = await axios.get(`${baseUrl}/api/category`, config);
         return data;
-    } catch (error) {
-        if(!error?.response){
-            throw error;
-        };
-        return rejectWithValue(error?.response?.data)
+      } catch (error) {
+        if (!error?.response) {
+          throw error;
+        }
+        return rejectWithValue(error?.response?.data);
+      }
     }
-});
+  );
+  
 
 //Update action
 export const updateCategoriesAction = createAsyncThunk('category/update',async(category,{rejectWithValue,getState,dispatch})=>{
@@ -134,7 +136,7 @@ export const fetchDetailCategoriesAction = createAsyncThunk('category/details',a
 });
 //slices
 const categorySlices = createSlice({
-    name:'category',
+    name: "category",
     initialState:{},
     extraReducers:(builder)=>{
         //create
@@ -159,20 +161,20 @@ const categorySlices = createSlice({
         });
          
         //fetch all
-        builder.addCase(fetchCategoriesAction.pending,(state,action)=>{
+        builder.addCase(fetchCategoriesAction.pending, (state, action) => {
             state.loading = true;
-        });
-        builder.addCase(fetchCategoriesAction.fulfilled,(state,action)=>{
+          });
+          builder.addCase(fetchCategoriesAction.fulfilled, (state, action) => {
             state.categoryList = action?.payload;
             state.loading = false;
             state.appErr = undefined;
             state.serverErr = undefined;
-        });
-        builder.addCase(fetchCategoriesAction.rejected,(state,action)=>{
+          });
+          builder.addCase(fetchCategoriesAction.rejected, (state, action) => {
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
-        })
+          });
 
         //Update
         builder.addCase(updateCategoriesAction.pending,(state,action)=>{

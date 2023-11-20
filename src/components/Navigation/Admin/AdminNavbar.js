@@ -36,11 +36,11 @@ const AdminNavbar = () => {
   //logout
   const dispatch = useDispatch();
   return (
-    <Disclosure as="nav" className="bg-green-800">
+    <Disclosure as="nav" className="bg-green-800 min-w-max">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
+          <div className="max-w-7xl mx-auto md:min-md:bg-red-500 px-4 sm:px-6 lg:px-8 bg-green-800">
+            <div className="flex justify-between h-16 md:max-md:w-full ">
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
