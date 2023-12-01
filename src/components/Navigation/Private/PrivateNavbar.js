@@ -16,7 +16,7 @@ const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
-  { name: "Authors", href: "/users", current: false },
+  // { name: "Profile", href: "/users", current: false },
 ];
 
 function classNames(...classes) {
@@ -24,8 +24,9 @@ function classNames(...classes) {
 }
 
 const PrivateNavbar = ({ isLogin }) => {
+  console.log('login ne',isLogin)
   const userNavigation = [
-    { name: "Your Profile", href: `/profile` },
+    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
     { name: "Change your password", href: "/update-password" },
     
 ];
@@ -108,7 +109,7 @@ const PrivateNavbar = ({ isLogin }) => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              // src={isLogin?.profilePhoto}
+                              src={isLogin?.profilePhoto}
                               alt=""
                             />
                           </Menu.Button>
@@ -176,16 +177,17 @@ const PrivateNavbar = ({ isLogin }) => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-10 w-10 rounded-full"
-                    // src={isLogin.profilePhoto}
+                    src={isLogin?.profilePhoto}
                     alt=""
                   />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-white">
-                    {/* {user.name} */}
+                    {isLogin?.firstName}{""}
+                    {isLogin?.lastName} 
                   </div>
                   <div className="text-sm font-medium text-gray-400">
-                    {/* {user.email} */}
+                    {isLogin?.email}
                   </div>
                 </div>
                 <button className="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">

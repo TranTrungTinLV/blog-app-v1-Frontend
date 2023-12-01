@@ -26,11 +26,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const AdminNavbar = () => {
+const AdminNavbar = ({isLogin}) => {
+  console.log(isLogin)
   //Navigation
   const userNavigation = [
-    { name: "Your Profile", href: `/profile` },
+    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
     { name: "Change your password", href: "/update-password" },
+    { name: "Settings", href: "/update-password" },
+
   ];
 
   //logout
@@ -112,7 +115,7 @@ const AdminNavbar = () => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              // src={userAuth?.profilePhoto}
+                              src={isLogin?.profilePhoto}
                               alt="Admin Profile"
                             />
                           </Menu.Button>
@@ -174,18 +177,19 @@ const AdminNavbar = () => {
                 </Link>
               ))}
             </div>
+            {/* Mobile reponsive */}
             <div className="pt-4 pb-3 border-t border-gray-700">
               <div className="flex items-center px-5 sm:px-6">
                 <div className="flex-shrink-0">
                   {/* Image */}
-                  <img className="h-10 w-10 rounded-full" src="" alt="" />
+                  <img className="h-10 w-10 rounded-full" src={isLogin?.profilePhoto} alt={isLogin?.firstName} />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-white">
-                    {/* {user.name} */}
+                    {isLogin?.firstName}
                   </div>
                   <div className="text-sm font-medium text-gray-400">
-                    {/* {user.email} */}
+                    {isLogin?.email}
                   </div>
                 </div>
                 <button className="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">

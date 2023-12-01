@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 // import { loginUserAction } from "../../../redux/slices/users/usersSlices";
 import './login.css'
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { loginUserAction } from "../../../redux/slices/users/usersSlices";
 
 //Form schema
@@ -31,8 +31,9 @@ const Login = () => {
   //redirect
   const store = useSelector(state => state?.users);
   const { userAuth, loading, serverErr, appErr } = store;
-  console.log(serverErr)
-  if (userAuth) return <Navigate to={`/profile/${userAuth?._id}`} replace/>; //abc
+  console.log(serverErr);
+  console.log(userAuth)
+  if (userAuth) return <Navigate to={`/`}/>; //abc
   return (
     <>
       <section className="min-h-screen relative py-20 2xl:py-40  overflow-hidden form_login">
@@ -140,13 +141,14 @@ const Login = () => {
                       </button>
                     )}
                   </form>
+                  
                   <div className="p-2">
-                    {/* <Link
-                      to="/password-reset-token"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Forget Password ?
-                    </Link> */}
+                  <Link
+                to="/password-reset-token"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
+                Or Update Your Password ?
+              </Link>
                   </div>
                 </div>
               </div>
