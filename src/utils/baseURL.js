@@ -1,2 +1,2 @@
-const baseUrl = process.env.REACT_APP_BACKEND_URL
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 export default baseUrl;

@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteCommentsAction } from "../../redux/slices/comments/CommentSlices";
 
 export default function CommentsList({ comments }) {
-  console.log(comments);
+  // console.log(comments);
   const user = useSelector(state => state?.users);
-  console.log(user);
+  // console.log(user);
   const { userAuth } = user
   const isLogginUser = userAuth?._id
-  console.log(isLogginUser)
+  // console.log(isLogginUser)
   //dispatch
   const dispatch = useDispatch()
   return (

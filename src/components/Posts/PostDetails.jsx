@@ -12,19 +12,19 @@ import CommentsList from "../Coments/CommentsList";
 const PostDetails = () => {
     // console.log(props)
     const { id } = useParams();
-    console.log(id)
+    // console.log(id)
     const dispatch = useDispatch();
     //select post detail from store
     const post = useSelector(state => state?.post);
     const { postDetails, loading, appErr, serverErr, isDeleted } = post;
-    console.log('post né', postDetails?.comments)
-    console.log(postDetails?.user?._id);
+    // console.log('post né', postDetails?.comments)
+    // console.log(postDetails?.user?._id);
 
     //comment
     const comment = useSelector(state => state?.comment);
-    console.log('comment ne', comment);
+    // console.log('comment ne', comment);
     const { commentCreated, commentDeleted } = comment;
-    console.log('tao ne', commentCreated)
+    // console.log('tao ne', commentCreated)
 
     useEffect(() => {
         dispatch(fetchPostDetailsAction(id))
@@ -39,7 +39,7 @@ const PostDetails = () => {
     // console.log(_id)
 
     const isCreateBy = postDetails?.user?._id === userAuth?._id;
-    console.log(isCreateBy)
+    // console.log(isCreateBy)
     if (isDeleted) return <Navigate to='/posts' />
     return (
 

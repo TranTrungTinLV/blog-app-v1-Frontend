@@ -25,7 +25,7 @@ const AddComment = ({ postId }) => {
                 postId,
                 description: values?.description
             }
-            console.log(data);
+            // console.log(data);
             // dispatch action
             dispatch(createCommentsAction(data))
         },

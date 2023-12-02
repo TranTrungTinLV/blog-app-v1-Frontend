@@ -38,7 +38,7 @@ const UpdateProfileForm = () => {
     onSubmit: values => {
       //dispath the action
       dispatch(updateUserAction(values));
-      console.log(values);
+      // console.log(values);
     },
     validationSchema: formSchema,
   });

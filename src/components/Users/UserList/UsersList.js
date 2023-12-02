@@ -15,7 +15,7 @@ const UsersList = () => {
     dispatch(fetchUsersAction())
   },[block,unblock])
   
-  console.log(users)
+  // console.log(users)
   return (
     <>
       <section class="py-8 bg-gray-900 min-h-screen">

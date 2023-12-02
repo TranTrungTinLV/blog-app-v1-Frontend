@@ -16,14 +16,14 @@ const formSchema = Yup.object({
 export default function UpdatePost() {
     const { id } = useParams();
 
-    console.log(id);
+    // console.log(id);
     //Fetch  the post in the url
     const dispatch = useDispatch();
     useEffect(() => { dispatch(fetchPostDetailsAction(id)) }, [id, dispatch]);
     //select post
     const postData = useSelector(state => state.post);
     const { postDetails } = postData;
-    console.log("blog ne", postDetails);
+    // console.log("blog ne", postDetails);
 
     //select update post from store;
     const postUpdate = useSelector(state => state.post);

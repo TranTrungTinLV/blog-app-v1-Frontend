@@ -35,17 +35,17 @@ export default function Register() {
     
     //select state from store
     const storeData = useSelector(store => store?.users);
-    console.log(storeData);
+    // console.log(storeData);
     const {loading,appErr,serverErr,registered} = storeData;
-    console.log(registered)
-    console.log(appErr,serverErr);
+    // console.log(registered)
+    // console.log(appErr,serverErr);
 
     //redirect
     if(registered){
-      return <Navigate to="/profile" replace/>
+      return <Navigate to="/login" replace/>
     }
   return (
-    <section className="relative py-20 2xl:py-40 bg-gray-800 overflow-hidden h-screen">
+    <section className="relative py-20 2xl:py-40 bg-gray-800 overflow-hidden h-full">
     <div className="relative container px-4 mx-auto">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-wrap items-center -mx-4">

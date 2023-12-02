@@ -14,7 +14,7 @@ export default function PostsList() {
   //selected post from store
   const post = useSelector(state => state?.post);
   const { postLists, likes, disLikes, loading, appErr, serverErr } = post;
-  console.log(post)
+  // console.log(post)
   // console.log(postLists[0]?.likes)
   // console.log(postLists[0]?.disLikes)
   const category = useSelector(state => state?.category);

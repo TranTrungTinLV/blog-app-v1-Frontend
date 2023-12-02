@@ -45,7 +45,7 @@ export default function UploadProfilePhoto() {
   //store data
   const users = useSelector(state => state?.users);
   const { profilePhoto, loading, appErr, serverErr,userAuth } = users;
-  console.log("ssdsdfdf",users)
+  // console.log("ssdsdfdf",users)
   //Navigative
   if(profilePhoto) return <Navigate to={`/profile/${userAuth?._id}`}/>
   return (

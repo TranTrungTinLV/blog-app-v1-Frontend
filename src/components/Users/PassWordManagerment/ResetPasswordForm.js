@@ -18,7 +18,7 @@ const ResetPasswordForm = () => {
       email: "",
     },
     onSubmit: values => {
-      console.log(values)
+      // console.log(values)
       //dispath the action
       dispatch(passwordResetTokenAction(values?.email));
     },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
@@ -15,6 +15,11 @@ const formSchema = Yup.object({
 
 const Login = () => {
   const dispatch = useDispatch();
+
+  function dispatchLogin(values) {
+    dispatch(loginUserAction(values));
+
+  }
   //formik
   const formik = useFormik({
     initialValues: {
@@ -23,7 +28,7 @@ const Login = () => {
     },
     onSubmit: values => {
       //dispath the action
-      dispatch(loginUserAction(values));
+      dispatchLogin(values)
     },
     validationSchema: formSchema,
   });
@@ -31,14 +36,18 @@ const Login = () => {
   //redirect
   const store = useSelector(state => state?.users);
   const { userAuth, loading, serverErr, appErr } = store;
-  console.log(serverErr);
-  console.log(userAuth)
-  if (userAuth) return <Navigate to={`/`}/>; //abc
+  // console.log(serverErr);
+  // console.log(userAuth);
+  
+  if(userAuth){
+    return <Navigate to={`/profile/${userAuth?._id}`}/>
+  }
+
   return (
     <>
       <section className="min-h-screen relative py-20 2xl:py-40  overflow-hidden form_login">
         <div className="absolute top-0 left-0 lg:bottom-0 h-full lg:h-auto w-full lg:w-4/12  lg:overflow-hidden">
-          
+
         </div>
         <div className="relative container px-4 mx-auto">
           <div className="max-w-5xl mx-auto">
@@ -50,11 +59,11 @@ const Login = () => {
                     <h3 className="mb-10 text-2xl font-bold font-heading">
                       {/* Header */}
                       Login to your Account
-                    {serverErr || appErr ? <h2 className="text-red-400 text-sm">{serverErr} {appErr}</h2>: null
-                    
-                    }
+                      {serverErr || appErr ? <h2 className="text-red-400 text-sm">{serverErr} {appErr}</h2> : null
 
-                       {/* display err */}
+                      }
+
+                      {/* display err */}
                     </h3>
                     <div className="flex items-center pl-6 mb-3 border border-gray-50 bg-white rounded-full">
                       <span className="inline-block pr-3 border-r border-gray-50">
@@ -141,14 +150,14 @@ const Login = () => {
                       </button>
                     )}
                   </form>
-                  
+
                   <div className="p-2">
-                  <Link
-                to="/password-reset-token"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Or Update Your Password ?
-              </Link>
+                    <Link
+                      to="/password-reset-token"
+                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Or Update Your Password ?
+                    </Link>
                   </div>
                 </div>
               </div>

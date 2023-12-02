@@ -18,7 +18,7 @@ const UpdatePassword = () => {
     onSubmit: values => {
       //dispath the action
       dispatch(updatePassWordAction(values?.password))
-      console.log(values);
+      // console.log(values);
     },
     validationSchema: formSchema,
   });

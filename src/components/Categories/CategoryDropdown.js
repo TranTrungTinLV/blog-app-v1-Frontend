@@ -14,7 +14,7 @@
         //select categories
         const category = useSelector(state=>state?.category);
         const {categoryList,loading,appErr,serverErr} = category;
-        console.log(categoryList)
+        // console.log(categoryList)
         const allCategories = categoryList?.map(category =>{
             return {
                 label: category?.title,

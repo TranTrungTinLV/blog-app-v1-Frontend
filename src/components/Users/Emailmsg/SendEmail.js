@@ -13,7 +13,7 @@ const formSchema = Yup.object({
 const SendEmail = () => {
   const location = useLocation();
   const { email, id } = location.state || {};
-  console.log(email,id)
+  // console.log(email,id)
   //dispath
   const dispatch = useDispatch();
 
