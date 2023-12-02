@@ -15,18 +15,18 @@ import LoadingComponent from "../../../utils/LoadingComponent";
 export default function Profile() {
 
   const { id } = useParams();
-  console.log('id ne', id);
+  // console.log('id ne', id);
   const dispatch = useDispatch();
   //History
   const navigate = useNavigate();
-  console.log("yes sir", navigate);
+  // console.log("yes sir", navigate);
 
  
 
   //User data from store
   const users = useSelector(state => state?.users);
   const { profile, loading, profileAppErr, profileServerErr, followed, unFollowed, userAuth } = users;
-  console.log("profile nè", users)
+  // console.log("profile nè", users)
    //send mail handle click
    const sendMailNavigate = () => {
     navigate('/send-mail', { state: { email: profile?.email, id: profile?._id } });
@@ -35,10 +35,10 @@ export default function Profile() {
   useEffect(() => {
     dispatch(userProfileAction(id));
   }, [id, dispatch, followed, unFollowed]);
-  console.log("view", profile?.viewedBy)
+  // console.log("view", profile?.viewedBy)
   //isLogin
   const isLogginUser = userAuth?._id === profile?._id;
-  console.log("hở???", isLogginUser);
+  // console.log("hở???", isLogginUser);
   return (
     <>
       <div className="min-h-screen">

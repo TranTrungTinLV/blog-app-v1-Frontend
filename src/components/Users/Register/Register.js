@@ -35,10 +35,10 @@ export default function Register() {
     
     //select state from store
     const storeData = useSelector(store => store?.users);
-    console.log(storeData);
+    // console.log(storeData);
     const {loading,appErr,serverErr,registered} = storeData;
-    console.log(registered)
-    console.log(appErr,serverErr);
+    // console.log(registered)
+    // console.log(appErr,serverErr);
 
     //redirect
     if(registered){

@@ -43,7 +43,7 @@ export default function CreatePost() {
             image: "",
         },
         onSubmit: values => {
-            console.log(values)
+            // console.log(values)
             //dispath the action
 
             const data = {

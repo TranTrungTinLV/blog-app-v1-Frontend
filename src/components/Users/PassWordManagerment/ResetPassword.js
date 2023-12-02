@@ -14,7 +14,7 @@ const formSchema = Yup.object({
 const ResetPassword = props => {
   const { token } = useParams();
   const navigate = useNavigate();
-  console.log("params", token);
+  // console.log("params", token);
   const dispatch = useDispatch();
   //formik
   const formik = useFormik({

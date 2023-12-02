@@ -7,18 +7,18 @@ import AccountVerificationAlertWarning from './Navigation/Alerts/AccountVerifica
 import AccountVerificationSuccessAlert from './Navigation/Alerts/AccountVerificationSuccessAlert'
 
 export default function Navbar(props) {
-  console.log("props",props)
+  // console.log("props",props)
   //get user from store
   const state = useSelector(state=>state.users);
-  console.log(state)
+  // console.log(state)
   const {userAuth,profile} = state;
-  console.log(userAuth)
+  // console.log(userAuth)
   const isAdmin = userAuth?.isAdmin;
-  console.log('---',profile)
+  // console.log('---',profile)
     //get user from store
     const account = useSelector(state=>state?.accountVerication);
     const {token,loading,appErr,serverErr} = account;
-    console.log('token',token);
+    // console.log('token',token);
     
   return (
     <>

@@ -14,7 +14,7 @@ const formSchema = Yup.object({
 
 const UpdateComment = () => {
     const { id } = useParams();
-    console.log(id)
+    // console.log(id)
     const dispatch = useDispatch();
     //fetch comment details
     useEffect(() => {
@@ -23,7 +23,7 @@ const UpdateComment = () => {
     //select comment from store
     const comment = useSelector(state => state?.comment);
     const { commentDetails, isUpdated } = comment;
-    console.log(commentDetails)
+    // console.log(commentDetails)
     // console.log(props)
     const formik = useFormik({
         enableReinitialize: true,

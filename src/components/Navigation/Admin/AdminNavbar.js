@@ -27,7 +27,7 @@ function classNames(...classes) {
 }
 
 const AdminNavbar = ({isLogin}) => {
-  console.log(isLogin)
+  // console.log(isLogin)
   //Navigation
   const userNavigation = [
     { name: "Your Profile", href: `/profile/${isLogin?._id}` },

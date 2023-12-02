@@ -31,8 +31,8 @@ const Login = () => {
   //redirect
   const store = useSelector(state => state?.users);
   const { userAuth, loading, serverErr, appErr } = store;
-  console.log(serverErr);
-  console.log(userAuth)
+  // console.log(serverErr);
+  // console.log(userAuth)
   if (userAuth) return <Navigate to={`/`}/>; //abc
   return (
     <>

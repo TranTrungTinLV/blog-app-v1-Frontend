@@ -6,7 +6,7 @@ import { logoutAction } from "../../../redux/slices/users/usersSlices";
 import { verifyAccountAction } from "../../../redux/slices/AccountVercation/accountVercationSlices";
 export default function AccountVerified() {
   const { token } = useParams();
-  console.log("params", token)
+  // console.log("params", token)
   //dispatch
   const dispatch = useDispatch();
   //verify account

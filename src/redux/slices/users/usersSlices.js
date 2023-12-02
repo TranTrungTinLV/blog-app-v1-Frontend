@@ -543,7 +543,7 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(updatePassWordAction.rejected, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
@@ -562,7 +562,7 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         })
         builder.addCase(fetchUserDetailsAction.rejected, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
@@ -582,7 +582,7 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(fetchUsersAction.rejected, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
@@ -601,7 +601,7 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(blockUsersAction.rejected, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
@@ -620,7 +620,7 @@ const usersSlices = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(unBlockUsersAction.rejected, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
