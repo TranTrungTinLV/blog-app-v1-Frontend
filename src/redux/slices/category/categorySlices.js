@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice,createAction} from '@reduxjs/toolkit';
 import axios from 'axios';
-import { baseUrl } from '../../../utils/baseURL';
+import  baseUrl  from '../../../utils/baseURL';
 
 //action to natigative 
 const resetEditAction = createAction("category/reset");

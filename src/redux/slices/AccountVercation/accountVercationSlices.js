@@ -1,6 +1,6 @@
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { baseUrl } from "../../../utils/baseURL";
+import  baseUrl  from "../../../utils/baseURL";
 
 const resetAcc = createAction("account/verify-reset");
 //action

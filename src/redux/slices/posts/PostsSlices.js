@@ -1,6 +1,6 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { baseUrl } from '../../../utils/baseURL';
+import  baseUrl  from '../../../utils/baseURL';
 
 //Create Post action
 const resetPostAction = createAction("category/reset");

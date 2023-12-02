@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-import { baseUrl } from "../../../utils/baseURL";
+import baseUrl  from "../../../utils/baseURL";
 //redirect action
 const resetUserAction = createAction('/user/profile/reset')
 const resetPasswordAction = createAction('password/reset')

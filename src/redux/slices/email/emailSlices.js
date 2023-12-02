@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import {baseUrl} from "../../../utils/baseURL";
+import baseUrl from "../../../utils/baseURL";
 
 //custion action for redirect
 
