@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { UploadIcon } from "@heroicons/react/outline";
 import Dropzone from "react-dropzone";
 import { useFormik } from "formik";
@@ -28,6 +29,7 @@ const formSchema = Yup.object({
 });
 
 export default function UploadProfilePhoto() {
+  const [previewSrc, setPreviewSrc] = useState('');
   const dispatch = useDispatch();
 
   //formik
@@ -68,6 +70,11 @@ export default function UploadProfilePhoto() {
                 accept="image/jpeg, image/png"
                 onDrop={acceptedFiles => {
                   formik.setFieldValue("image", acceptedFiles[0]);
+                  const fileReader = new FileReader();
+                  fileReader.readAsDataURL(acceptedFiles[0]);
+                  fileReader.onload = (e) => {
+                    setPreviewSrc(e.target.result);
+                  }; 
                 }}
               >
                 {({ getRootProps, getInputProps }) => (

@@ -155,6 +155,7 @@ export const updateUserAction = createAsyncThunk('users/update', async (userData
         dispatch(resetUserAction());
         return data
     } catch (error) {
+        console.log("loi")
         if (!error?.response) {
             throw error
         }
@@ -514,8 +515,8 @@ const usersSlices = createSlice({
         })
         builder.addCase(updateUserAction.fulfilled, (state, action) => {
             state.loading = false;
-            state.isUpdated = true;
             state.userUpdated = action?.payload
+            state.isUpdated = false;
             state.appErr = undefined;
             state.serverErr = undefined;
         });
