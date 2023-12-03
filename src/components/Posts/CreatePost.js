@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPostAction } from "../../redux/slices/posts/PostsSlices";
 import CategoryDropdown from "../Categories/CategoryDropdown";
 import { Navigate } from "react-router-dom";
+import React, { useState } from "react";
+import './CreatePost.css';
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 //Form schema
 const formSchema = Yup.object({
@@ -34,6 +38,9 @@ export default function CreatePost() {
     const post = useSelector(state => state?.post);
     const { isCreated, loading, appErr, serverErr } = post;
     // console.log(postCreated);
+
+    //
+    const [previewSrc, setPreviewSrc] = useState('');
     //formik
     const formik = useFormik({
         initialValues: {
@@ -56,6 +63,18 @@ export default function CreatePost() {
         },
         validationSchema: formSchema,
     });
+
+    // Hàm này được gọi khi có file được chọn trong Dropzone
+    const handleDrop = acceptedFiles => {
+        const file = acceptedFiles[0];
+        formik.setFieldValue("image", file);
+        setPreviewSrc(URL.createObjectURL(file)); // Tạo và cập nhật URL xem trước
+    };
+    // Hàm xử lý xoá ảnh xem trước
+    const handleDeletePreview = () => {
+        setPreviewSrc(''); // Loại bỏ ảnh khỏi state
+        formik.setFieldValue("image", ''); // Loại bỏ ảnh khỏi formik
+    };
 
     //redirect
     if (isCreated) return <Navigate to="/posts" replace />;
@@ -157,29 +176,36 @@ export default function CreatePost() {
                                     Select image
                                 </label>
                                 <Dropzone
-  onBlur={formik.handleBlur("image")}
-  accept="image/jpeg, image/png, image/*"
-  onDrop={acceptedFiles => {
-      formik.setFieldValue("image", acceptedFiles[0]);
-  }}
->
-  {({ getRootProps, getInputProps }) => (
-    <div class="flex items-center justify-center w-full mt-6">
-      <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-        <div {...getRootProps({
-          className: "dropzone flex flex-col items-center justify-center pt-5 pb-6",
-          onDrop: event => event.stopPropagation(),
-        })}>
-          <input {...getInputProps()} />
-          <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
-            {/* SVG Path here */}
-          </svg>
-          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> image</p>
-        </div>
-      </label>
-    </div>
-  )}
-</Dropzone>
+                                    onBlur={formik.handleBlur("image")}
+                                    accept="image/jpeg, image/png, image/*"
+                                    onDrop={handleDrop}
+                                >
+                                    {({ getRootProps, getInputProps }) => (
+                                        <div class="flex items-center justify-center w-full mt-6">
+                                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                <div {...getRootProps({
+                                                    className: "dropzone flex flex-col items-center justify-center pt-5 pb-6",
+                                                    onDrop: event => event.stopPropagation(),
+                                                })}>
+                                                    <input {...getInputProps()} />
+                                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
+                                                        {/* SVG Path here */}
+                                                    </svg>
+                                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> image</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    )}
+                                </Dropzone>
+                                {previewSrc && (
+
+                                    <div className="preview-container mx-auto  text-center w-screen justify-center items-center flex flex-row ">
+                                        <img src={previewSrc} alt="Preview" className="preview-image text-center mx-auto w-full" />
+                                        <button onClick={handleDeletePreview} className="delete-preview-button">
+                                           <IoMdCloseCircleOutline/>
+                                        </button>
+                                    </div>
+                                )}
 
                             </div>
                             {/* Err msg */}

@@ -1,0 +1,37 @@
+/* CSS cho ảnh xem trước */
+.preview-image {
+    max-width: 100%; /* Chiều rộng tối đa là 100% của container */
+    max-height: 200px; /* Chiều cao tối đa là 200px */
+    margin-top: 10px; /* Khoảng cách trên 10px */
+    border-radius: 10px; /* Bo góc */
+}
+.preview-container {
+    position: relative;
+    display: inline-block;
+    /* margin: auto;
+    width:100%; */
+    /* max-width:100%; */
+    width: fit-content; /* Đặt chiều rộng theo kích thước ảnh */
+
+}
+
+
+
+.delete-preview-button {
+    position: absolute;
+    top: 8px; /* Điều chỉnh vị trí từ trên xuống */
+    right: 0px; /* Điều chỉnh vị trí từ phải sang */
+    border: none;
+    background-color: transparent;
+    color: red; /* Màu cho icon */
+    cursor: pointer;
+    font-size: 24px; /* Kích thước của icon */
+}
+
+
+/* Media query cho màn hình nhỏ (điện thoại) */
+@media (max-width: 600px) {
+    .preview-image {
+        max-height: 150px; /* Giảm chiều cao ảnh xem trước cho màn hình nhỏ */
+    }
+}
