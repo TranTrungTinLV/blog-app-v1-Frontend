@@ -1,2 +1,2 @@
-const baseUrl = "https://blog-app-backend-dysj.onrender.com";
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 export default baseUrl;
